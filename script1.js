@@ -32,7 +32,7 @@ document.getElementById('copy-btn').addEventListener('click', () => {
     }
 });
 
-// Encrypts the input text and hashes it with SHA-1
+// Encrypts the input text and hashes it with SHA-512
 async function encryptText(text) {
     const encoder = new TextEncoder();
     const data = encoder.encode(text);
@@ -43,15 +43,15 @@ async function encryptText(text) {
     // Convert encrypted data to base64
     const base64Encrypted = arrayBufferToBase64(encryptedBuffer);
     
-    // Hash the original text with SHA-1
-    const sha1Hash = await computeSHA1(text);
+    // Hash the original text with SHA-512
+    const sha512Hash = await computeSHA512(text);
     
-    return `Encrypted: ${base64Encrypted}\nSHA-1 Hash: ${sha1Hash}`;
+    return `Encrypted: ${base64Encrypted}\nSHA-512 Hash: ${sha512Hash}`;
 }
 
-// Decrypts the encrypted text and verifies the SHA-1 hash
+// Decrypts the encrypted text and verifies the SHA-512 hash
 async function decryptText(input) {
-    const [encryptedText, hash] = input.split('\nSHA-1 Hash: ');
+    const [encryptedText, hash] = input.split('\nSHA-512 Hash: ');
     
     if (!encryptedText || !hash) {
         throw new Error("Invalid input format.");
@@ -64,21 +64,21 @@ async function decryptText(input) {
     const decoder = new TextDecoder();
     const decryptedText = decoder.decode(decryptedBuffer);
     
-    // Verify the SHA-1 hash
-    const computedHash = await computeSHA1(decryptedText);
+    // Verify the SHA-512 hash
+    const computedHash = await computeSHA512(decryptedText);
     if (computedHash === hash) {
         return decryptedText;
     } else {
-        throw new Error("SHA-1 hash mismatch.");
+        throw new Error("SHA-512 hash mismatch.");
     }
 }
 
-// Computes SHA-1 hash of the input
-async function computeSHA1(input) {
+// Computes SHA-512 hash of the input
+async function computeSHA512(input) {
     const encoder = new TextEncoder();
     const data = encoder.encode(input);
 
-    const hashBuffer = await crypto.subtle.digest('SHA-1', data);
+    const hashBuffer = await crypto.subtle.digest('SHA-512', data);
     return arrayBufferToHex(hashBuffer);
 }
 

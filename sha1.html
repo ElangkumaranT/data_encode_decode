@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elangkumaran</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>SHA-1 Algorithm</h1>
+        <h1>Encrypt/Decrypt</h1>
+        <textarea id="input-text" rows="4" cols="50" placeholder="Enter your text here"></textarea>
+        <div class="radio-group">
+            <input type="radio" id="encrypt" name="operation" value="encrypt" checked>
+            <label for="encrypt">Encrypt</label>
+            <input type="radio" id="decrypt" name="operation" value="decrypt">
+            <label for="decrypt">Decrypt</label>
+        </div>
+        <button id="convert-btn">Convert</button>
+        <p id="result"></p>
+        <button id="copy-btn" style="display:none;">Copy</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
